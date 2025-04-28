@@ -5,24 +5,42 @@ import { useTranslation } from "react-i18next";
 import CategorySelector from "../components/glossary/CategorySelector";
 import GlossaryTerm from "../components/glossary/GlossaryTerm";
 import { Skeleton } from "@/components/ui/skeleton";
+import { GlossaryCategory, GlossaryTerm as GlossaryTermType } from "@shared/schema";
+
+// Define the category type for the selector component
+type SelectorCategory = {
+  id: number;
+  value: string;
+  label: string;
+};
 
 const Glossary = () => {
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
   
-  const { data: categories, isLoading: categoriesLoading } = useQuery({
+  const { data: categories, isLoading: categoriesLoading } = useQuery<GlossaryCategory[]>({
     queryKey: ['/api/glossary/categories'],
   });
   
-  const { data: terms, isLoading: termsLoading } = useQuery({
+  const { data: terms, isLoading: termsLoading } = useQuery<GlossaryTermType[]>({
     queryKey: ['/api/glossary/terms', selectedCategory],
   });
   
-  const filteredTerms = terms?.filter(term => 
+  const filteredTerms = terms?.filter((term: GlossaryTermType) => 
     term.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
     term.definition.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Format categories for the selector component
+  const formattedCategories: SelectorCategory[] = categories ? [
+    { id: 0, value: "all", label: t('glossary.allCategories') },
+    ...(categories || []).map(cat => ({
+      id: cat.id,
+      value: cat.value,
+      label: cat.label
+    }))
+  ] : [];
 
   return (
     <div className="container mx-auto px-4">
@@ -39,7 +57,7 @@ const Glossary = () => {
           </div>
         ) : (
           <CategorySelector 
-            categories={categories || []} 
+            categories={formattedCategories} 
             selectedCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
           />
@@ -66,7 +84,7 @@ const Glossary = () => {
           </div>
         ) : filteredTerms && filteredTerms.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredTerms.map(term => {
+            {filteredTerms.map((term: GlossaryTermType) => {
               // Find category label from the categories data
               const category = categories?.find(cat => cat.id === term.categoryId);
               
@@ -76,6 +94,7 @@ const Glossary = () => {
                   term={term.term} 
                   definition={term.definition} 
                   category={category?.label || ""}
+                  termId={term.id}
                 />
               );
             })}

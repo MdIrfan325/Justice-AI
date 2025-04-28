@@ -23,7 +23,7 @@ const GlossaryTerm = ({ term, definition, category, termId }: GlossaryTermProps)
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   
   // Fetch detailed term data when dialog opens
-  const { data: termDetails } = useQuery({
+  const { data: termDetails } = useQuery<any>({
     queryKey: ['/api/glossary/term', termId],
     enabled: isDialogOpen && !!termId,
   });
