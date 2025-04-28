@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface DocumentAnalysisProps {
-  documentId: string;
+  documentId: string | number;
   analysisResults: any | null;
   onAnalysisComplete: (results: any) => void;
 }

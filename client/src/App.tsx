@@ -9,7 +9,6 @@ import Glossary from "./pages/Glossary";
 import AiQA from "./pages/AiQA";
 import Documents from "./pages/Documents";
 import News from "./pages/News";
-import Templates from "./pages/Templates";
 import NotFound from "./pages/not-found";
 
 function Router() {
@@ -20,7 +19,6 @@ function Router() {
       <Route path="/ai-qa" component={AiQA} />
       <Route path="/documents" component={Documents} />
       <Route path="/news" component={News} />
-      <Route path="/templates" component={Templates} />
       <Route component={NotFound} />
     </Switch>
   );

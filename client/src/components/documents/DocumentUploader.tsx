@@ -6,7 +6,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 interface DocumentUploaderProps {
-  onDocumentUploaded: (documentId: string) => void;
+  onDocumentUploaded: (documentId: string | number) => void;
 }
 
 const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
@@ -76,27 +76,26 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
       const formData = new FormData();
       formData.append('document', file);
       
-      // Using apiRequest from queryClient for error handling consistency
+      // Use a standard fetch for FormData uploads
       const response = await fetch('/api/documents/upload', {
         method: 'POST',
         body: formData,
-        // Don't set Content-Type header when using FormData
-        // The browser will automatically set it with the correct boundary
+        // Don't set Content-Type with FormData - browser handles it automatically
       });
       
       if (!response.ok) {
-        let errorMessage = 'Upload failed';
+        const errorText = await response.text();
+        let errorMessage;
         try {
-          const errorData = await response.json();
-          errorMessage = errorData.message || errorMessage;
+          const errorJson = JSON.parse(errorText);
+          errorMessage = errorJson.message || errorText;
         } catch (e) {
-          // If we can't parse json, use status text
-          errorMessage = `${errorMessage}: ${response.statusText}`;
+          errorMessage = errorText || response.statusText;
         }
-        throw new Error(errorMessage);
+        throw new Error(errorMessage || t('documents.uploadError'));
       }
       
-      const data = await response.json() as {documentId: string};
+      const data = await response.json() as {documentId: number};
       
       toast({
         title: t('documents.uploadSuccess'),
