@@ -38,8 +38,8 @@ const NewsCard = ({
         <p className="text-dark text-sm mb-3 line-clamp-3">{summary}</p>
         <div className="flex justify-between items-center">
           <span className="text-xs text-gray-500">{formattedDate}</span>
-          <Link href={url}>
-            <a className="text-accent text-sm hover:underline">Read more</a>
+          <Link href={url} className="text-accent text-sm hover:underline">
+            Read more
           </Link>
         </div>
       </div>

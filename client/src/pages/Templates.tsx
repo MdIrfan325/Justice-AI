@@ -417,6 +417,16 @@ function renderTemplate(template: string, values: Record<string, string>): strin
   return rendered;
 }
 
+// Render and translate template text
+function renderAndTranslateTemplate(template: string, values: Record<string, string>): string {
+  // First render the template with user values
+  let rendered = renderTemplate(template, values);
+  
+  // This function will be called with the i18n context from the component
+  // so we don't need to reference window.i18nextInstance
+  return rendered;
+}
+
 const TemplatesPage = () => {
   const { t, i18n } = useTranslation();
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
@@ -546,8 +556,8 @@ const TemplatesPage = () => {
           {selectedTemplate ? (
             <Card>
               <CardHeader>
-                <CardTitle>{selectedTemplate.title}</CardTitle>
-                <CardDescription>{selectedTemplate.description}</CardDescription>
+                <CardTitle>{t(`templates.${selectedTemplate.id}.title`, selectedTemplate.title)}</CardTitle>
+                <CardDescription>{t(`templates.${selectedTemplate.id}.description`, selectedTemplate.description)}</CardDescription>
               </CardHeader>
               
               <Tabs value={currentTab} onValueChange={setCurrentTab}>
@@ -561,8 +571,8 @@ const TemplatesPage = () => {
                     <div className="space-y-4">
                       {selectedTemplate.fields.map(field => (
                         <div key={field.id} className="space-y-2">
-                          <label htmlFor={field.id} className="text-sm font-medium">
-                            {field.label}
+                          <label htmlFor={field.id} className="text-sm font-medium block w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                            {t(`templates.${selectedTemplate.id}.fields.${field.id}`, field.label)}
                             {field.required && <span className="text-red-500 ml-1">*</span>}
                           </label>
                           
@@ -597,7 +607,9 @@ const TemplatesPage = () => {
                               </SelectTrigger>
                               <SelectContent>
                                 {field.options.map(option => (
-                                  <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                                  <SelectItem key={option.value} value={option.value}>
+                                    <span className="block truncate">{t(`templates.${selectedTemplate.id}.options.${option.value}`, option.label)}</span>
+                                  </SelectItem>
                                 ))}
                               </SelectContent>
                             </Select>
