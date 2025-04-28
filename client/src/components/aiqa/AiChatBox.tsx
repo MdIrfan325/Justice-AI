@@ -54,7 +54,7 @@ const AiChatBox = ({
                     {message.type === 'ai' && (
                       <i className="ri-robot-line mr-2 text-primary pt-1 shrink-0"></i>
                     )}
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden w-full">
                       <p className="text-dark text-sm break-words whitespace-pre-wrap">{message.text}</p>
                       {message.citations && (
                         <p className="text-xs text-primary mt-2 break-words">{message.citations}</p>

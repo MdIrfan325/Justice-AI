@@ -25,6 +25,20 @@
   max-height: 2.5rem;
 }
 
+/* Additional text wrapping utilities */
+.break-words {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
 /* Improved transition */
 .transition-custom {
   transition: all 0.2s ease-in-out;
