@@ -76,40 +76,27 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
       const formData = new FormData();
       formData.append('document', file);
       
-      // Use XMLHttpRequest instead of fetch for better file upload handling
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/api/documents/upload', true);
-
-      // Set up progress tracking if needed
-      xhr.upload.onprogress = (event) => {
-        if (event.lengthComputable) {
-          const progress = Math.round((event.loaded / event.total) * 100);
-          console.log(`Upload progress: ${progress}%`);
-        }
-      };
-      
-      // Promise to handle the XHR request
-      const uploadPromise = new Promise((resolve, reject) => {
-        xhr.onload = function() {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            try {
-              const data = JSON.parse(xhr.responseText);
-              resolve(data);
-            } catch (e) {
-              reject(new Error('Invalid JSON response'));
-            }
-          } else {
-            reject(new Error(`Upload failed: ${xhr.statusText}`));
-          }
-        };
-        xhr.onerror = () => reject(new Error('Network error occurred'));
+      // Using apiRequest from queryClient for error handling consistency
+      const response = await fetch('/api/documents/upload', {
+        method: 'POST',
+        body: formData,
+        // Don't set Content-Type header when using FormData
+        // The browser will automatically set it with the correct boundary
       });
       
-      // Start the upload
-      xhr.send(formData);
+      if (!response.ok) {
+        let errorMessage = 'Upload failed';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorMessage;
+        } catch (e) {
+          // If we can't parse json, use status text
+          errorMessage = `${errorMessage}: ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
       
-      // Wait for the upload to complete
-      const data = await uploadPromise as {documentId: string};
+      const data = await response.json() as {documentId: string};
       
       toast({
         title: t('documents.uploadSuccess'),
@@ -133,11 +120,11 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
     <Card>
       <CardContent className="pt-6">
         <div 
-          className={`border-2 border-dashed rounded-lg p-8 mb-6 text-center transition-colors ${
+          className={`border-2 border-dashed rounded-lg p-6 md:p-8 mb-6 text-center transition-all cursor-pointer hover:border-primary hover:bg-gray-50 ${
             isDragging 
-              ? 'border-primary bg-lavender bg-opacity-20' 
+              ? 'border-primary bg-secondary/20 shadow-inner' 
               : file 
-                ? 'border-green-500 bg-green-50' 
+                ? 'border-green-500 bg-green-50/50' 
                 : 'border-gray-300'
           }`}
           onDragOver={handleDragOver}
@@ -162,8 +149,8 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
               
               <div>
                 <label htmlFor="document-file-input" className="cursor-pointer">
-                  <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                    <i className="ri-upload-line mr-2"></i>
+                  <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                    <i className="ri-folder-open-line mr-2"></i>
                     {t('documents.browseFiles')}
                   </div>
                 </label>
@@ -182,7 +169,7 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
         <div className="text-center">
           <Button 
             disabled={!file || isUploading} 
-            className="bg-accent hover:bg-opacity-90 text-white rounded-lg transition-custom px-8"
+            className="bg-accent hover:bg-accent/90 text-white transition-custom px-8 font-medium"
             onClick={handleUpload}
           >
             {isUploading ? (
