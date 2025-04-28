@@ -1,0 +1,203 @@
+{
+  "nav": {
+    "home": "Home",
+    "glossary": "Glossary",
+    "aiQA": "AI Q&A",
+    "documents": "Documents",
+    "news": "News",
+    "expertDirectory": "Expert Directory",
+    "community": "Community"
+  },
+  "hero": {
+    "title": "Your Legal Assistant Powered by AI",
+    "description": "Get instant answers to legal questions, analyze documents, and access a comprehensive legal knowledge base.",
+    "tryAIButton": "Try AI Legal Assistant",
+    "exploreButton": "Explore Features",
+    "aiAssistant": "AI Legal Assistant",
+    "sampleQuestion": "What is the procedure for filing a consumer complaint in India?",
+    "sampleAnswer": {
+      "intro": "To file a consumer complaint in India, follow these steps:",
+      "step1": "Submit a written complaint to the business",
+      "step2": "If unresolved, file at the appropriate Consumer Forum",
+      "step3": "Include all documents and payment details",
+      "citation": "Based on Consumer Protection Act, 2019"
+    },
+    "askPlaceholder": "Ask a legal question..."
+  },
+  "features": {
+    "title": "Core Features",
+    "viewAll": "View all features",
+    "glossary": {
+      "title": "Interactive Legal Glossary",
+      "description": "Categorized legal terms with user-friendly explanations across various domains.",
+      "link": "Explore Glossary"
+    },
+    "quizzes": {
+      "title": "Legal Quizzes",
+      "description": "Interactive tests to help track your legal knowledge progress.",
+      "link": "Take a Quiz"
+    },
+    "aiQA": {
+      "title": "AI Legal Q&A",
+      "description": "Get answers to legal questions with relevant law citations and context.",
+      "link": "Ask AI Assistant"
+    },
+    "docAnalysis": {
+      "title": "Document Analysis",
+      "description": "Upload and analyze legal documents with key information extraction.",
+      "link": "Analyze Documents"
+    },
+    "multilingual": {
+      "title": "Multilingual Support",
+      "description": "Full functionality in English, Hindi, and Telugu with seamless switching.",
+      "link": "Change Language"
+    },
+    "experts": {
+      "title": "Expert Directory",
+      "description": "Find verified legal professionals by specialty and location.",
+      "link": "Find Experts"
+    }
+  },
+  "glossaryPreview": {
+    "title": "Legal Glossary",
+    "viewFull": "View full glossary",
+    "searchPlaceholder": "Search legal terms...",
+    "learnMore": "Learn more",
+    "noTermsFound": "No terms found matching your search."
+  },
+  "newsSection": {
+    "title": "Legal News & Updates",
+    "viewAll": "View all news",
+    "noNews": "No news articles available at this time."
+  },
+  "aiFeature": {
+    "title": "AI-Powered Contract Analysis",
+    "description": "Our advanced AI can automatically identify potentially unfavorable terms in contracts and provide plain language explanations.",
+    "benefit1": "Highlight unfavorable clauses and explain implications",
+    "benefit2": "Compare against standard terms for similar contracts",
+    "benefit3": "Suggest alternative language for negotiation",
+    "analyzeButton": "Analyze My Contract",
+    "contractAnalyzer": "Contract Analyzer",
+    "aiPowered": "AI Powered",
+    "dropFile": "Drop your contract file here or click to browse",
+    "uploadDocument": "Upload Document",
+    "exampleAnalysis": "Example Analysis Result",
+    "exampleSection": "Section 12.3: Indemnification",
+    "exampleText": "The Client agrees to indemnify and hold harmless the Company from any and all claims...",
+    "aiAnalysis": "AI Analysis",
+    "analysisText": "This clause creates a one-sided indemnification obligation. Consider requesting mutual indemnification to balance responsibilities.",
+    "poweredBy": "Powered by Gemini API 2.0 Flash with local processing for data privacy"
+  },
+  "expertDirectory": {
+    "title": "Expert Directory",
+    "viewAll": "View all experts",
+    "searchPlaceholder": "Search legal experts...",
+    "allSpecialties": "All Specialties",
+    "allLocations": "All Locations",
+    "noExpertsFound": "No experts found matching your criteria."
+  },
+  "footer": {
+    "tagline": "Democratizing legal knowledge with AI-powered tools for everyone.",
+    "features": "Features",
+    "legalGlossary": "Legal Glossary",
+    "legalQuizzes": "Legal Quizzes",
+    "aiLegalQA": "AI Legal Q&A",
+    "documentAnalysis": "Document Analysis",
+    "expertDirectory": "Expert Directory",
+    "resources": "Resources",
+    "helpCenter": "Help Center",
+    "communityForum": "Community Forum",
+    "legalNews": "Legal News",
+    "faqs": "FAQs",
+    "contactSupport": "Contact Support",
+    "downloadApp": "Download App",
+    "appDescription": "Get the JusticeAI app with offline capabilities and mobile-optimized features.",
+    "allRightsReserved": "All rights reserved.",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "glossary": {
+    "title": "Legal Glossary",
+    "description": "Browse and search through our comprehensive collection of legal terms organized by different domains of law.",
+    "searchPlaceholder": "Search legal terms...",
+    "noTermsFound": "No terms found",
+    "tryDifferentSearch": "Try a different search term or category"
+  },
+  "aiQA": {
+    "title": "AI Legal Assistant",
+    "description": "Get instant answers to your legal questions with relevant citations from laws and precedents.",
+    "welcome": "Welcome to the AI Legal Assistant",
+    "askAnything": "Ask any legal question and get an AI-generated response based on relevant laws and precedents.",
+    "inputPlaceholder": "Type your legal question here...",
+    "errorMessage": "Sorry, I'm having trouble processing your request. Please try again later.",
+    "suggestedTopics": "Suggested Topics",
+    "topic1": "What are my rights if I'm arrested?",
+    "topic2": "How do I file for divorce in India?",
+    "topic3": "What is the process for registering a company?",
+    "topic4": "What are the landlord's responsibilities for rental property?",
+    "about": "About AI Legal Assistant",
+    "aboutDescription": "Our AI Legal Assistant provides information and guidance on legal matters, powered by Gemini API 2.0 Flash.",
+    "feature1": "Based on latest legal information and precedents",
+    "feature2": "Provides citations to relevant laws and cases",
+    "feature3": "Processes queries locally for privacy and speed",
+    "disclaimer": "This information is for educational purposes only and should not be considered legal advice. Consult a qualified legal professional for specific advice."
+  },
+  "documents": {
+    "title": "Document Analysis",
+    "description": "Upload legal documents for AI-powered analysis, information extraction, and compliance checking.",
+    "uploadTab": "Upload Document",
+    "analysisTab": "Analysis Results",
+    "dragAndDrop": "Drag and drop your file here",
+    "allowedFileFormats": "Supported formats: PDF, DOCX, TXT (Max 5MB)",
+    "browseFiles": "Browse Files",
+    "upload": "Upload Document",
+    "uploading": "Uploading...",
+    "fileSelected": "File Selected",
+    "invalidFileType": "Invalid file type",
+    "allowedFileTypes": "Please upload a PDF, DOCX, or TXT file.",
+    "fileTooLarge": "File too large",
+    "maxFileSize": "Maximum file size is 5MB.",
+    "uploadSuccess": "Document uploaded successfully",
+    "proceedToAnalysis": "Proceeding to analysis...",
+    "uploadError": "Upload failed",
+    "analyzing": "Analyzing Document",
+    "analysisError": "Analysis Error",
+    "unknownError": "An unknown error occurred during analysis.",
+    "noResults": "No Analysis Results",
+    "pleaseUpload": "Please upload a document first.",
+    "analysisResults": "Document Analysis Results",
+    "summary": "Summary",
+    "keyInfo": "Key Information",
+    "risks": "Risks",
+    "compliance": "Compliance",
+    "documentSummary": "Document Summary",
+    "documentType": "Document Type",
+    "analysisTime": "Analysis Time",
+    "seconds": "seconds",
+    "pageCount": "Page Count",
+    "pages": "pages",
+    "noRisksFound": "No Risks Found",
+    "documentSafe": "This document appears to be safe and without significant legal risks."
+  },
+  "news": {
+    "title": "Legal News & Updates",
+    "categoryFilter": "Filter by Category",
+    "allCategories": "All Categories",
+    "supremeCourt": "Supreme Court",
+    "highCourt": "High Court",
+    "legislation": "Legislation",
+    "international": "International",
+    "noNews": "No news articles available",
+    "checkBackLater": "Please check back later for updates."
+  },
+  "experts": {
+    "title": "Expert Directory",
+    "description": "Find verified legal professionals specializing in different areas of law.",
+    "searchPlaceholder": "Search legal experts...",
+    "allSpecialties": "All Specialties",
+    "allLocations": "All Locations",
+    "noExpertsFound": "No experts found",
+    "tryDifferentFilters": "Try different search terms or filters"
+  }
+}
