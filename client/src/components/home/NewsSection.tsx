@@ -4,10 +4,20 @@ import { Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 import NewsCard from "../news/NewsCard";
 
+interface NewsItem {
+  id: number;
+  title: string;
+  summary: string;
+  category: string;
+  date: string;
+  imageUrl: string;
+  externalUrl?: string;
+}
+
 const NewsSection = () => {
   const { t } = useTranslation();
   
-  const { data: news, isLoading } = useQuery({
+  const { data: news, isLoading } = useQuery<NewsItem[]>({
     queryKey: ['/api/news/featured'],
   });
 
@@ -29,15 +39,15 @@ const NewsSection = () => {
               <Skeleton className="h-48 w-full mt-0.5 rounded-b-lg" />
             </div>
           ))
-        ) : news?.length ? (
-          news.map(item => (
+        ) : news && Array.isArray(news) && news.length > 0 ? (
+          news.map((item: NewsItem) => (
             <NewsCard
               key={item.id}
               title={item.title}
               summary={item.summary}
               category={item.category}
               date={item.date}
-              imageUrl={item.imageUrl}
+              imageUrl={item.imageUrl || ''}
               url={`/news/${item.id}`}
             />
           ))
