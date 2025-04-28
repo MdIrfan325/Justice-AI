@@ -531,8 +531,8 @@ const TemplatesPage = () => {
                       <i className={template.icon}></i>
                     </div>
                     <div>
-                      <h3 className="font-semibold">{template.title}</h3>
-                      <p className="text-sm text-gray-500">{template.description}</p>
+                      <h3 className="font-semibold">{t(`templates.${template.id}.title`, template.title)}</h3>
+                      <p className="text-sm text-gray-500 card-description">{t(`templates.${template.id}.description`, template.description)}</p>
                     </div>
                   </div>
                 </CardContent>
