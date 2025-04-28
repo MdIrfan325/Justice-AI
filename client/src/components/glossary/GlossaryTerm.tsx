@@ -40,7 +40,7 @@ const GlossaryTerm = ({ term, definition, category, termId }: GlossaryTermProps)
           </div>
           <div>
             <h3 className="font-montserrat font-semibold text-primary text-lg">{term}</h3>
-            <p className="text-dark text-sm mt-1 line-clamp-3">{definition}</p>
+            <p className="text-dark text-sm mt-1 line-clamp-3 glossary-term-content">{definition}</p>
           </div>
         </div>
         <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-100">
@@ -85,7 +85,7 @@ const GlossaryTerm = ({ term, definition, category, termId }: GlossaryTermProps)
                 <i className="ri-information-line mr-2"></i>
                 {t('glossary.definition')}
               </h4>
-              <p className="text-dark">{definition}</p>
+              <p className="text-dark glossary-term-content">{definition}</p>
             </div>
             
             {termDetails?.explanationHtml && (

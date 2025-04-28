@@ -346,6 +346,54 @@ Employer                     Employee
   }
 ];
 
+// Common legal terms translations (English → Telugu/Hindi)
+const legalTerms: Record<string, Record<string, string>> = {
+  'hi': {
+    'AFFIDAVIT': 'शपथ पत्र',
+    'POWER OF ATTORNEY': 'मुख्तारनामा',
+    'RENTAL AGREEMENT': 'किराया समझौता',
+    'LAST WILL AND TESTAMENT': 'अंतिम इच्छा और वसीयत',
+    'WITNESS': 'गवाह',
+    'LANDLORD': 'मकान मालिक',
+    'TENANT': 'किरायेदार',
+    'EXECUTOR': 'निष्पादक',
+    'PREMISES': 'परिसर',
+    'NOTARY PUBLIC': 'नोटरी पब्लिक',
+    'SIGNED': 'हस्ताक्षरित',
+    'DECLARATION': 'घोषणा',
+    'IN WITNESS WHEREOF': 'इसकी गवाही में',
+    'RESIDENCE': 'निवास स्थान',
+    'TERM': 'अवधि',
+    'RENT': 'किराया',
+    'SECURITY DEPOSIT': 'सुरक्षा जमा',
+    'UTILITIES': 'उपयोगिताएँ',
+    'MAINTENANCE': 'रखरखाव',
+    'TERMINATION': 'समाप्ति'
+  },
+  'te': {
+    'AFFIDAVIT': 'ప్రమాణ పత్రం',
+    'POWER OF ATTORNEY': 'పవర్ ఆఫ్ అటార్నీ',
+    'RENTAL AGREEMENT': 'అద్దె ఒప్పందం',
+    'LAST WILL AND TESTAMENT': 'చివరి వీలు మరియు వీలునామా',
+    'WITNESS': 'సాక్షి',
+    'LANDLORD': 'ఇంటి యజమాని',
+    'TENANT': 'అద్దెదారు',
+    'EXECUTOR': 'ఎగ్జిక్యూటర్',
+    'PREMISES': 'ఆవరణ',
+    'NOTARY PUBLIC': 'నోటరీ పబ్లిక్',
+    'SIGNED': 'సంతకం చేయబడింది',
+    'DECLARATION': 'ప్రకటన',
+    'IN WITNESS WHEREOF': 'దీనికి సాక్షిగా',
+    'RESIDENCE': 'నివాసం',
+    'TERM': 'కాలవ్యవధి',
+    'RENT': 'అద్దె',
+    'SECURITY DEPOSIT': 'భద్రతా డిపాజిట్',
+    'UTILITIES': 'ఉపయోగిటీలు',
+    'MAINTENANCE': 'నిర్వహణ',
+    'TERMINATION': 'ముగింపు'
+  }
+};
+
 // Render helper for preview
 function renderTemplate(template: string, values: Record<string, string>): string {
   let rendered = template;
@@ -370,7 +418,7 @@ function renderTemplate(template: string, values: Record<string, string>): strin
 }
 
 const TemplatesPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [currentTab, setCurrentTab] = useState<string>('form');
@@ -407,11 +455,29 @@ const TemplatesPage = () => {
     setCurrentTab('preview');
   };
   
+  // Render and translate template content
+  const renderAndTranslateTemplate = (template: string, values: Record<string, string>): string => {
+    let rendered = renderTemplate(template, values);
+    const currentLanguage = i18n.language;
+    
+    // Apply translations for non-English languages
+    if (currentLanguage === 'te' || currentLanguage === 'hi') {
+      if (legalTerms[currentLanguage]) {
+        Object.keys(legalTerms[currentLanguage]).forEach(term => {
+          const regex = new RegExp(`\\b${term}\\b`, 'gi');
+          rendered = rendered.replace(regex, legalTerms[currentLanguage][term]);
+        });
+      }
+    }
+    
+    return rendered;
+  };
+
   // Handle download
   const handleDownload = () => {
     if (!selectedTemplate) return;
     
-    const rendered = renderTemplate(selectedTemplate.template, formValues);
+    const rendered = renderAndTranslateTemplate(selectedTemplate.template, formValues);
     const blob = new Blob([rendered], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -553,7 +619,7 @@ const TemplatesPage = () => {
                     <div className="bg-gray-50 p-4 rounded-lg border">
                       <ScrollArea className="h-[500px] w-full pr-4">
                         <pre className="whitespace-pre-wrap font-mono text-sm">
-                          {renderTemplate(selectedTemplate.template, formValues)}
+                          {renderAndTranslateTemplate(selectedTemplate.template, formValues)}
                         </pre>
                       </ScrollArea>
                     </div>
