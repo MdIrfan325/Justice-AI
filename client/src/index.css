@@ -93,6 +93,14 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-montserrat;
   }
+
+  /* Handle text overflow */
+  p, h1, h2, h3, h4, h5, h6, div, span {
+    @apply break-words;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
 }
 
 @layer utilities {

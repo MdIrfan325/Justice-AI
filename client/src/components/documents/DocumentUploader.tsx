@@ -161,19 +161,12 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
               <p className="text-sm text-gray-500 mb-4">{t('documents.allowedFileFormats')}</p>
               
               <div>
-                <Button 
-                  type="button"
-                  variant="outline"
-                  className="flex items-center"
-                  onClick={() => {
-                    // This is a workaround to programmatically trigger the file input
-                    const fileInput = document.getElementById('document-file-input');
-                    if (fileInput) fileInput.click();
-                  }}
-                >
-                  <i className="ri-upload-line mr-2"></i>
-                  {t('documents.browseFiles')}
-                </Button>
+                <label htmlFor="document-file-input" className="cursor-pointer">
+                  <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                    <i className="ri-upload-line mr-2"></i>
+                    {t('documents.browseFiles')}
+                  </div>
+                </label>
                 <input 
                   id="document-file-input"
                   type="file" 
