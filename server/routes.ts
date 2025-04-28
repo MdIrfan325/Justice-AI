@@ -627,12 +627,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
           ]
         };
         
-        // Set legal-specific content based on filename
-        if (document.fileName.toLowerCase().includes('agreement') || 
-            document.fileName.toLowerCase().includes('contract')) {
+        // Set legal-specific content based on filename with more detailed document type detection
+        const fileName = document.fileName.toLowerCase();
+        
+        if (fileName.includes('agreement') || fileName.includes('contract')) {
           analysisResult.keyInformation.push({
             title: "Document Type Detection",
             content: "This appears to be a legal agreement or contract document. Such documents typically define terms, conditions, obligations, and rights between parties."
+          });
+          
+          // Add more specific contract analysis
+          if (fileName.includes('employment')) {
+            analysisResult.summary = "Employment Agreement Analysis\n\nThis document appears to be an employment agreement that establishes the terms and conditions of an employment relationship. It likely contains provisions regarding job responsibilities, compensation, benefits, confidentiality, intellectual property, and termination conditions.";
+            
+            analysisResult.keyInformation.push({
+              title: "Employment Agreement Elements",
+              content: "This document likely contains sections covering job title and duties, compensation structure, work schedule, benefits, probationary period, confidentiality, non-compete clauses, and termination conditions."
+            });
+            
+            analysisResult.potentialRisks.push({
+              title: "Employment Law Compliance",
+              severity: "medium",
+              description: "Employment agreements must comply with federal, state, and local labor laws regarding minimum wage, overtime, leave policies, and anti-discrimination provisions."
+            });
+          } else if (fileName.includes('nda') || fileName.includes('confidentiality')) {
+            analysisResult.summary = "Non-Disclosure/Confidentiality Agreement Analysis\n\nThis document appears to establish confidentiality obligations between parties. It defines what information is considered confidential and the obligations of the receiving party to maintain confidentiality.";
+            
+            analysisResult.keyInformation.push({
+              title: "Confidentiality Agreement Elements",
+              content: "This document likely contains sections defining confidential information, permitted disclosures, time period of confidentiality obligations, and remedies for breach."
+            });
+          } else if (fileName.includes('lease') || fileName.includes('rental')) {
+            analysisResult.summary = "Lease/Rental Agreement Analysis\n\nThis document appears to establish a landlord-tenant relationship for property rental. It outlines the terms of the rental arrangement including duration, payment terms, and responsibilities of both parties.";
+            
+            analysisResult.keyInformation.push({
+              title: "Lease Agreement Elements",
+              content: "This document likely contains sections covering property description, lease term, rent amount and payment schedule, security deposit, maintenance responsibilities, and termination conditions."
+            });
+          }
+        } else if (fileName.includes('will') || fileName.includes('testament')) {
+          analysisResult.summary = "Last Will and Testament Analysis\n\nThis document appears to be a last will and testament that expresses the testator's wishes regarding the distribution of their assets and property after death.";
+          
+          analysisResult.keyInformation.push({
+            title: "Will Document Elements",
+            content: "This document likely contains sections identifying the testator, naming of executor(s), asset distribution instructions, guardianship designations for minor children (if applicable), and signature with witness attestations."
+          });
+          
+          analysisResult.potentialRisks.push({
+            title: "Will Execution Requirements",
+            severity: "medium",
+            description: "Will documents must comply with state-specific execution requirements including proper signatures, witness attestations, and potentially notarization to be considered valid."
+          });
+        } else if (fileName.includes('policy')) {
+          analysisResult.summary = "Policy Document Analysis\n\nThis appears to be a policy document that outlines rules, guidelines, or requirements for a specific domain or organization.";
+          
+          analysisResult.keyInformation.push({
+            title: "Policy Document Elements",
+            content: "This document likely contains sections defining policy scope, responsibilities, procedures, compliance requirements, and enforcement mechanisms."
           });
         }
         
