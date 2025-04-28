@@ -34,37 +34,38 @@ const LanguageSelector = ({ isMobile = false }: LanguageSelectorProps) => {
   
   if (isMobile) {
     return (
-      <Button 
-        variant="ghost" 
-        className="flex items-center text-white justify-between w-full p-0 h-auto"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>Language: {currentLanguage}</span>
-        <i className={`ri-arrow-${isOpen ? 'up' : 'down'}-s-line`}></i>
+      <div className="relative">
+        <div 
+          className="flex items-center text-white justify-between w-full p-2 cursor-pointer rounded-md hover:bg-opacity-20 hover:bg-white transition-custom"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span>Language: {currentLanguage}</span>
+          <i className={`ri-arrow-${isOpen ? 'up' : 'down'}-s-line`}></i>
+        </div>
         
         {isOpen && (
           <div className="absolute left-0 right-0 top-full mt-1 bg-white rounded-md shadow-lg z-50 p-1">
-            <button 
-              className="w-full text-left px-4 py-2 text-sm hover:bg-lavender hover:bg-opacity-50 rounded transition-custom"
+            <div 
+              className="w-full text-left px-4 py-2 text-sm hover:bg-lavender hover:bg-opacity-50 rounded transition-custom cursor-pointer"
               onClick={() => changeLanguage('en')}
             >
               English
-            </button>
-            <button 
-              className="w-full text-left px-4 py-2 text-sm hover:bg-lavender hover:bg-opacity-50 rounded transition-custom"
+            </div>
+            <div 
+              className="w-full text-left px-4 py-2 text-sm hover:bg-lavender hover:bg-opacity-50 rounded transition-custom cursor-pointer"
               onClick={() => changeLanguage('hi')}
             >
               हिन्दी
-            </button>
-            <button 
-              className="w-full text-left px-4 py-2 text-sm hover:bg-lavender hover:bg-opacity-50 rounded transition-custom"
+            </div>
+            <div 
+              className="w-full text-left px-4 py-2 text-sm hover:bg-lavender hover:bg-opacity-50 rounded transition-custom cursor-pointer"
               onClick={() => changeLanguage('te')}
             >
               తెలుగు
-            </button>
+            </div>
           </div>
         )}
-      </Button>
+      </div>
     );
   }
   

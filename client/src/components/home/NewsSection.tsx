@@ -15,11 +15,9 @@ const NewsSection = () => {
     <section className="mb-8">
       <div className="flex justify-between items-end mb-6">
         <h2 className="text-primary font-montserrat text-2xl font-bold">{t('newsSection.title')}</h2>
-        <Link href="/news">
-          <a className="text-accent flex items-center hover:underline">
-            <span>{t('newsSection.viewAll')}</span>
-            <i className="ri-arrow-right-line ml-1"></i>
-          </a>
+        <Link href="/news" className="text-accent flex items-center hover:underline">
+          <span>{t('newsSection.viewAll')}</span>
+          <i className="ri-arrow-right-line ml-1"></i>
         </Link>
       </div>
       
