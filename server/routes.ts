@@ -56,6 +56,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Get a specific glossary term by ID
+  app.get('/api/glossary/term/:id?', async (req, res) => {
+    try {
+      if (!req.params.id) {
+        return res.status(400).json({ message: 'Term ID is required' });
+      }
+      
+      const termId = parseInt(req.params.id);
+      if (isNaN(termId)) {
+        return res.status(400).json({ message: 'Invalid term ID' });
+      }
+      
+      const term = await storage.getGlossaryTerm(termId);
+      if (!term) {
+        return res.status(404).json({ message: 'Term not found' });
+      }
+      
+      res.json(term);
+    } catch (error) {
+      console.error('Error fetching glossary term:', error);
+      res.status(500).json({ message: 'Failed to fetch glossary term' });
+    }
+  });
+  
   // ===== News Routes =====
   
   // Get all news
