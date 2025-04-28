@@ -44,6 +44,7 @@ export interface IStorage {
   getUserDocument(id: number): Promise<UserDocument | undefined>;
   saveUserDocument(document: InsertUserDocument): Promise<UserDocument>;
   updateDocumentAnalysis(id: number, analysisResult: any): Promise<UserDocument>;
+  clearDocumentAnalysis(id: number): Promise<UserDocument>;
   
   // AI Conversation methods
   saveAiConversation(conversation: InsertAiConversation): Promise<AiConversation>;
@@ -269,6 +270,22 @@ export class MemStorage implements IStorage {
     const updatedDocument = {
       ...document,
       analysisResult
+    };
+    
+    this.userDocuments.set(id, updatedDocument);
+    return updatedDocument;
+  }
+  
+  async clearDocumentAnalysis(id: number): Promise<UserDocument> {
+    const document = this.userDocuments.get(id);
+    
+    if (!document) {
+      throw new Error(`Document with ID ${id} not found`);
+    }
+    
+    const updatedDocument = {
+      ...document,
+      analysisResult: null
     };
     
     this.userDocuments.set(id, updatedDocument);
