@@ -71,6 +71,7 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
     if (!file) return;
     
     setIsUploading(true);
+    console.log(`Attempting to upload file: ${file.name} (${file.type}, ${file.size} bytes)`);
     
     try {
       const formData = new FormData();
@@ -83,26 +84,41 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
         // Don't set Content-Type with FormData - browser handles it automatically
       });
       
-      if (!response.ok) {
-        const errorText = await response.text();
-        let errorMessage;
+      let errorMessage;
+      let responseData;
+      
+      try {
+        // Try to parse JSON response whether successful or not
+        const responseText = await response.text();
         try {
-          const errorJson = JSON.parse(errorText);
-          errorMessage = errorJson.message || errorText;
+          responseData = JSON.parse(responseText);
         } catch (e) {
-          errorMessage = errorText || response.statusText;
+          // If not valid JSON, use raw text
+          console.error('Response is not valid JSON:', responseText);
+          responseData = { message: responseText };
         }
-        throw new Error(errorMessage || t('documents.uploadError'));
+      } catch (e) {
+        console.error('Error reading response:', e);
+        responseData = { message: 'Could not read server response' };
       }
       
-      const data = await response.json() as {documentId: number};
+      if (!response.ok) {
+        errorMessage = responseData?.message || response.statusText || t('documents.uploadError');
+        throw new Error(errorMessage);
+      }
+      
+      console.log('Upload successful:', responseData);
+      
+      if (!responseData?.documentId) {
+        throw new Error(t('documents.missingDocumentId'));
+      }
       
       toast({
         title: t('documents.uploadSuccess'),
         description: t('documents.proceedToAnalysis'),
       });
       
-      onDocumentUploaded(data.documentId);
+      onDocumentUploaded(responseData.documentId);
     } catch (error) {
       console.error('Upload error:', error);
       toast({

@@ -34,12 +34,25 @@ const DocumentAnalysis = ({
   // Custom query function to handle fetch with proper URL
   const fetchDocumentAnalysis = async () => {
     try {
+      console.log(`Fetching analysis for document ID: ${documentId}`);
       const response = await fetch(`/api/documents/analyze/${documentId}`);
+      
+      // Parse the response
+      const responseData = await response.json();
+      
       if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
+        console.error("Error fetching document analysis:", responseData);
+        
+        // If the server returned a fallback analysis, use it
+        if (responseData.fallbackAnalysis) {
+          return responseData.fallbackAnalysis;
+        }
+        
+        throw new Error(responseData.message || `Error: ${response.status} ${response.statusText}`);
       }
-      const data = await response.json();
-      return data || DEFAULT_ANALYSIS;
+      
+      // Successfully got the analysis
+      return responseData || DEFAULT_ANALYSIS;
     } catch (error) {
       console.error("Error fetching document analysis:", error);
       return DEFAULT_ANALYSIS;
