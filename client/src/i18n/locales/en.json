@@ -4,8 +4,8 @@
     "glossary": "Glossary",
     "aiQA": "AI Q&A",
     "documents": "Documents",
+    "templates": "Templates",
     "news": "News",
-    "expertDirectory": "Expert Directory",
     "community": "Community"
   },
   "hero": {
@@ -199,5 +199,22 @@
     "allLocations": "All Locations",
     "noExpertsFound": "No experts found",
     "tryDifferentFilters": "Try different search terms or filters"
+  },
+  "templates": {
+    "title": "Legal Document Templates",
+    "description": "Create professional legal documents using our templates. Fill in the required information and generate your document in minutes.",
+    "filterByCategory": "Filter by Category",
+    "selectCategory": "Select category",
+    "allCategories": "All Categories",
+    "personal": "Personal",
+    "business": "Business",
+    "property": "Property",
+    "selectPrompt": "Select a Template",
+    "selectDescription": "Choose a template from the list to get started with your legal document.",
+    "fillForm": "Fill Form",
+    "preview": "Preview",
+    "generateDocument": "Generate Document",
+    "backToEdit": "Back to Edit",
+    "download": "Download Document"
   }
 }

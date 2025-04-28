@@ -10,8 +10,8 @@ const NavigationBar = () => {
     { path: "/glossary", icon: "ri-book-2-line", label: t("nav.glossary") },
     { path: "/ai-qa", icon: "ri-question-answer-line", label: t("nav.aiQA") },
     { path: "/documents", icon: "ri-file-text-line", label: t("nav.documents") },
+    { path: "/templates", icon: "ri-draft-line", label: t("nav.templates", "Templates") },
     { path: "/news", icon: "ri-newspaper-line", label: t("nav.news") },
-    { path: "/experts", icon: "ri-team-line", label: t("nav.expertDirectory") },
   ];
 
   return (

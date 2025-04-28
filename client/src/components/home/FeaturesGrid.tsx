@@ -22,10 +22,10 @@ const FeatureCard = ({ icon, title, description, link, linkText, bgColor }: Feat
       </div>
     </div>
     <Link href={link}>
-      <a className="text-accent text-sm font-medium flex items-center hover:underline mt-2">
+      <div className="text-accent text-sm font-medium flex items-center hover:underline mt-2 cursor-pointer">
         <span>{linkText}</span>
         <i className="ri-arrow-right-line ml-1"></i>
-      </a>
+      </div>
     </Link>
   </div>
 );
@@ -75,11 +75,11 @@ const FeaturesGrid = () => {
       bgColor: "bg-mint"
     },
     {
-      icon: "ri-team-line",
-      title: t('features.experts.title'),
-      description: t('features.experts.description'),
-      link: "/experts",
-      linkText: t('features.experts.link'),
+      icon: "ri-draft-line",
+      title: t('templates.title', 'Legal Document Templates'),
+      description: t('templates.description', 'Create professional legal documents using our templates.'),
+      link: "/templates",
+      linkText: t('features.docAnalysis.link', 'Create Documents'),
       bgColor: "bg-mint"
     }
   ];
@@ -88,10 +88,12 @@ const FeaturesGrid = () => {
     <section className="mb-8">
       <div className="flex justify-between items-end mb-6">
         <h2 className="text-primary font-montserrat text-2xl font-bold">{t('features.title')}</h2>
-        <a href="#" className="text-accent flex items-center hover:underline">
-          <span>{t('features.viewAll')}</span>
-          <i className="ri-arrow-right-line ml-1"></i>
-        </a>
+        <Link href="/glossary">
+          <div className="text-accent flex items-center hover:underline cursor-pointer">
+            <span>{t('features.viewAll')}</span>
+            <i className="ri-arrow-right-line ml-1"></i>
+          </div>
+        </Link>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
