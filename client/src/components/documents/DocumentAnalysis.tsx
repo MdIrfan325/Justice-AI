@@ -22,7 +22,7 @@ const DocumentAnalysis = ({
   
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['/api/documents/analyze', documentId],
-    enabled: !analysisResults,
+    enabled: !!documentId && !analysisResults,
   });
   
   useEffect(() => {

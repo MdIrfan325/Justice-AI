@@ -217,8 +217,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Analyze document
-  app.get('/api/documents/analyze/:documentId', async (req, res) => {
+  app.get('/api/documents/analyze/:documentId?', async (req, res) => {
     try {
+      if (!req.params.documentId) {
+        // Handle the case where no document ID is provided
+        return res.json({
+          summary: "No document selected. Please upload a document first.",
+          documentType: "None",
+          keyInformation: [],
+          potentialRisks: [],
+          complianceChecks: []
+        });
+      }
+      
       const documentId = parseInt(req.params.documentId);
       
       if (isNaN(documentId)) {

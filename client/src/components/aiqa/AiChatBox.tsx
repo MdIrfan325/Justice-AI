@@ -52,12 +52,12 @@ const AiChatBox = ({
                 >
                   <div className="flex items-start">
                     {message.type === 'ai' && (
-                      <i className="ri-robot-line mr-2 text-primary pt-1"></i>
+                      <i className="ri-robot-line mr-2 text-primary pt-1 shrink-0"></i>
                     )}
-                    <div>
-                      <p className="text-dark text-sm">{message.text}</p>
+                    <div className="overflow-hidden">
+                      <p className="text-dark text-sm break-words whitespace-pre-wrap">{message.text}</p>
                       {message.citations && (
-                        <p className="text-xs text-primary mt-2">{message.citations}</p>
+                        <p className="text-xs text-primary mt-2 break-words">{message.citations}</p>
                       )}
                     </div>
                   </div>
