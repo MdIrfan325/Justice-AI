@@ -178,7 +178,12 @@
     "pageCount": "Page Count",
     "pages": "pages",
     "noRisksFound": "No Risks Found",
-    "documentSafe": "This document appears to be safe and without significant legal risks."
+    "documentSafe": "This document appears to be safe and without significant legal risks.",
+    "reanalyze": "Reanalyze Document",
+    "reanalyzing": "Reanalyzing...",
+    "reanalysisComplete": "Reanalysis Complete",
+    "freshAnalysisAvailable": "Fresh analysis is now available",
+    "reanalysisError": "Reanalysis Error"
   },
   "news": {
     "title": "Legal News & Updates",
