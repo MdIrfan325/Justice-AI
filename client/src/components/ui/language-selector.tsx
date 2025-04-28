@@ -28,8 +28,13 @@ const LanguageSelector = ({ isMobile = false }: LanguageSelectorProps) => {
   })();
   
   const changeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang);
-    setIsOpen(false);
+    i18n.changeLanguage(lang).then(() => {
+      // Force a page refresh to ensure all components update
+      localStorage.setItem('i18nextLng', lang);
+      setIsOpen(false);
+    }).catch((err) => {
+      console.error('Failed to change language:', err);
+    });
   };
   
   if (isMobile) {

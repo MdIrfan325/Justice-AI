@@ -7,11 +7,13 @@ import DocumentAnalysis from "../components/documents/DocumentAnalysis";
 const Documents = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("upload");
-  const [documentId, setDocumentId] = useState<string | null>(null);
+  const [documentId, setDocumentId] = useState<number | null>(null);
   const [analysisResults, setAnalysisResults] = useState<any | null>(null);
 
-  const handleDocumentUploaded = (id: string) => {
-    setDocumentId(id);
+  const handleDocumentUploaded = (id: string | number) => {
+    // Ensure we're storing a number
+    const numericId = typeof id === 'string' ? parseInt(id) : id;
+    setDocumentId(numericId);
     setActiveTab("analysis");
   };
 

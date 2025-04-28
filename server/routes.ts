@@ -216,20 +216,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Analyze document
-  app.get('/api/documents/analyze/:documentId?', async (req, res) => {
+  // Analyze document - route without parameter
+  app.get('/api/documents/analyze', async (_req, res) => {
     try {
-      if (!req.params.documentId) {
-        // Handle the case where no document ID is provided
-        return res.json({
-          summary: "No document selected. Please upload a document first.",
-          documentType: "None",
-          keyInformation: [],
-          potentialRisks: [],
-          complianceChecks: []
-        });
-      }
-      
+      // Default response when no document ID is provided
+      return res.json({
+        summary: "No document selected. Please upload a document first.",
+        documentType: "None",
+        analysisTime: 0,
+        pageCount: 0,
+        keyInformation: [],
+        potentialRisks: [],
+        complianceChecks: []
+      });
+    } catch (error) {
+      console.error('Error in document analyze endpoint:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+
+  // Analyze document - route with parameter
+  app.get('/api/documents/analyze/:documentId', async (req, res) => {
+    try {
       const documentId = parseInt(req.params.documentId);
       
       if (isNaN(documentId)) {
@@ -244,9 +252,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Check if analysis already exists
       if (document.analysisResult) {
+        console.log('Using cached analysis result');
         return res.json(document.analysisResult);
       }
       
+      console.log('Performing new document analysis');
       // Perform new analysis with AI
       const analysisResult = await ai.analyzeDocument(document.content || "");
       

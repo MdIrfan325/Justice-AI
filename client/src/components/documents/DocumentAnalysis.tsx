@@ -20,8 +20,23 @@ const DocumentAnalysis = ({
   const { t } = useTranslation();
   const [currentTab, setCurrentTab] = useState("summary");
   
+  // Custom query function to handle fetch with proper URL
+  const fetchDocumentAnalysis = async () => {
+    try {
+      const response = await fetch(`/api/documents/analyze/${documentId}`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching document analysis:", error);
+      throw error;
+    }
+  };
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['/api/documents/analyze', documentId],
+    queryFn: fetchDocumentAnalysis,
     enabled: !!documentId && !analysisResults,
   });
   
