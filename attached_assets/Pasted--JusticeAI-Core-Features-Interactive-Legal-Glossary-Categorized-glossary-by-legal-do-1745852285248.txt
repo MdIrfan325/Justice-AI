@@ -1,0 +1,36 @@
+# JusticeAI
+
+## Core Features:
+* **Interactive Legal Glossary**: Categorized glossary by legal domains presented in a user-friendly format.
+* **Legal Quizzes**: Interactive quizzes to help users track their learning progress.
+* **AI Legal Q&A**: AI powered tool that answers legal questions based on provided context and citations of relevant laws.
+* **Document Analysis**: Upload and analyze legal documents with key information extraction and compliance checking.
+* **Document Creation**: Templates and guided workflows for creating common legal documents.
+* **Multilingual Support**: Full functionality in English, Hindi, and Telugu with seamless language switching.
+* **Legal News & Updates**: Personalized feed of latest judgments and legislative changes.
+* **Expert Directory**: Database of verified legal professionals filterable by specialty and location.
+* **Court Case Tracker**: Track ongoing court cases with hearing date reminders and document management.
+* **Community Forum**: Moderated discussion spaces organized by legal topics.
+* **Legal Fee Calculator**: Estimation tools for common legal procedures and court fees.
+* **AI Contract Analysis**: Automatic identification of unfavorable terms with plain language explanations.
+* **Offline Access Mode**: Downloaded resources available without internet connection.
+* **Accessibility Features**: Screen reader compatibility and text-to-speech functionality.
+
+## Technical Implementation:
+* **Gemini API 2.0 Flash Integration**: Leveraging Google's latest Gemini API for ultra-fast AI responses and enhanced language processing capabilities.
+* **On-device AI Processing**: Core AI features operate locally for immediate responses and data privacy.
+* **Self-contained System**: Complete functionality without dependency on other external paid APIs or services.
+* **Offline-capable AI**: Core AI features work without internet connection after initial download.
+
+## Style Guidelines:
+* **Primary color**: Deep royal blue (#1A365D) for headers and primary elements, conveying trust and authority.
+* **Secondary color**: Soft ivory (#F9F7F0) for backgrounds and content areas.
+* **Accent colors**: Vibrant coral (#FF7272) for interactive elements and amber gold (#FFBE0B) for highlights and important information.
+* **Tertiary palette**: Subtle lavender (#E2E0FF) and pale mint (#E0F5E8) for sectional differentiation.
+* **Clean, grid-based layout** with rounded corners (8px radius) on containers.
+* **Professional icons** with a modern, crisp line style and slight gradient effects.
+* **Smooth, purposeful animations** with 300ms ease-in-out transitions.
+* **Typography**: Sans-serif Montserrat for headers and Open Sans for body text.
+* **Card-based UI** with subtle drop shadows (rgba(0,0,0,0.08) 0px 4px 12px).
+* **Consistent spacing** using 8px increment system (8px, 16px, 24px, 32px).
+* **Responsive design** with thoughtful component adaptation across device sizes.
