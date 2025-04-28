@@ -1,9 +1,10 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { GeminiAI } from "./ai/gemini";
 import multer from "multer";
 import path from "path";
+import { NextFunction } from "express";
 
 // Initialize the AI service
 const ai = new GeminiAI();
@@ -14,7 +15,7 @@ const upload = multer({
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB max file size
   },
-  fileFilter: (_req, file, cb) => {
+  fileFilter: (_req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     const allowedTypes = [
       'application/pdf',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -236,7 +237,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       // Perform new analysis with AI
-      const analysisResult = await ai.analyzeDocument(document.content);
+      const analysisResult = await ai.analyzeDocument(document.content || "");
       
       // Save analysis result
       await storage.updateDocumentAnalysis(documentId, analysisResult);

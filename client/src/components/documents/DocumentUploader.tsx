@@ -76,17 +76,40 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
       const formData = new FormData();
       formData.append('document', file);
       
-      const response = await fetch('/api/documents/upload', {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'
+      // Use XMLHttpRequest instead of fetch for better file upload handling
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/documents/upload', true);
+
+      // Set up progress tracking if needed
+      xhr.upload.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const progress = Math.round((event.loaded / event.total) * 100);
+          console.log(`Upload progress: ${progress}%`);
+        }
+      };
+      
+      // Promise to handle the XHR request
+      const uploadPromise = new Promise((resolve, reject) => {
+        xhr.onload = function() {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+              const data = JSON.parse(xhr.responseText);
+              resolve(data);
+            } catch (e) {
+              reject(new Error('Invalid JSON response'));
+            }
+          } else {
+            reject(new Error(`Upload failed: ${xhr.statusText}`));
+          }
+        };
+        xhr.onerror = () => reject(new Error('Network error occurred'));
       });
       
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
+      // Start the upload
+      xhr.send(formData);
       
-      const data = await response.json();
+      // Wait for the upload to complete
+      const data = await uploadPromise as {documentId: string};
       
       toast({
         title: t('documents.uploadSuccess'),
