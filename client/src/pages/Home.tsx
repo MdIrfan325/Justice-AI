@@ -3,7 +3,6 @@ import FeaturesGrid from "../components/home/FeaturesGrid";
 import GlossaryPreview from "../components/home/GlossaryPreview";
 import NewsSection from "../components/home/NewsSection";
 import AIFeatureSection from "../components/home/AIFeatureSection";
-import ExpertDirectoryPreview from "../components/home/ExpertDirectoryPreview";
 
 const Home = () => {
   return (
@@ -13,7 +12,6 @@ const Home = () => {
       <GlossaryPreview />
       <NewsSection />
       <AIFeatureSection />
-      <ExpertDirectoryPreview />
     </div>
   );
 };

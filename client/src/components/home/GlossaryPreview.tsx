@@ -28,10 +28,10 @@ const GlossaryPreview = () => {
       <div className="flex justify-between items-end mb-6">
         <h2 className="text-primary font-montserrat text-2xl font-bold">{t('glossaryPreview.title')}</h2>
         <Link href="/glossary">
-          <a className="text-accent flex items-center hover:underline">
+          <div className="text-accent flex items-center hover:underline cursor-pointer">
             <span>{t('glossaryPreview.viewFull')}</span>
             <i className="ri-arrow-right-line ml-1"></i>
-          </a>
+          </div>
         </Link>
       </div>
       
@@ -85,10 +85,10 @@ const GlossaryPreview = () => {
                 <div className="flex justify-between items-center mt-3">
                   <span className="bg-lavender px-2 py-1 rounded-sm text-xs text-primary">{term.categoryLabel}</span>
                   <Link href={`/glossary/${term.id}`}>
-                    <a className="text-accent hover:underline text-sm">
+                    <div className="text-accent hover:underline text-sm cursor-pointer">
                       <i className="ri-book-open-line mr-1"></i>
                       <span>{t('glossaryPreview.learnMore')}</span>
-                    </a>
+                    </div>
                   </Link>
                 </div>
               </div>

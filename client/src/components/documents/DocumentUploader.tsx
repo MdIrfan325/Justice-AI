@@ -161,18 +161,26 @@ const DocumentUploader = ({ onDocumentUploaded }: DocumentUploaderProps) => {
               <p className="text-sm text-gray-500 mb-4">{t('documents.allowedFileFormats')}</p>
               
               <div>
-                <label className="inline-block cursor-pointer">
-                  <Button variant="outline">
-                    <i className="ri-upload-line mr-2"></i>
-                    {t('documents.browseFiles')}
-                  </Button>
-                  <input 
-                    type="file" 
-                    className="hidden" 
-                    accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
-                    onChange={handleFileChange}
-                  />
-                </label>
+                <Button 
+                  type="button"
+                  variant="outline"
+                  className="flex items-center"
+                  onClick={() => {
+                    // This is a workaround to programmatically trigger the file input
+                    const fileInput = document.getElementById('document-file-input');
+                    if (fileInput) fileInput.click();
+                  }}
+                >
+                  <i className="ri-upload-line mr-2"></i>
+                  {t('documents.browseFiles')}
+                </Button>
+                <input 
+                  id="document-file-input"
+                  type="file" 
+                  className="hidden" 
+                  accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
+                  onChange={handleFileChange}
+                />
               </div>
             </div>
           )}
