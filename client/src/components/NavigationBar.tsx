@@ -23,14 +23,14 @@ const NavigationBar = () => {
               const isActive = location === item.path;
               return (
                 <Link key={item.path} href={item.path}>
-                  <a className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-dark transition-custom ${
+                  <div className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-dark transition-custom ${
                     isActive 
                       ? "bg-lavender text-primary font-medium" 
                       : "hover:bg-lavender hover:bg-opacity-50"
                   }`}>
                     <i className={item.icon}></i>
                     <span>{item.label}</span>
-                  </a>
+                  </div>
                 </Link>
               );
             })}

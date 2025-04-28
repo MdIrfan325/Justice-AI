@@ -66,14 +66,19 @@ const Glossary = () => {
           </div>
         ) : filteredTerms && filteredTerms.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredTerms.map(term => (
-              <GlossaryTerm 
-                key={term.id} 
-                term={term.term} 
-                definition={term.definition} 
-                category={term.category}
-              />
-            ))}
+            {filteredTerms.map(term => {
+              // Find category label from the categories data
+              const category = categories?.find(cat => cat.id === term.categoryId);
+              
+              return (
+                <GlossaryTerm 
+                  key={term.id} 
+                  term={term.term} 
+                  definition={term.definition} 
+                  category={category?.label || ""}
+                />
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-8">

@@ -365,7 +365,9 @@ export class MemStorage implements IStorage {
       { value: "civil-law", label: "Civil Law", description: "Laws dealing with disputes between individuals or organizations" },
       { value: "property-law", label: "Property Law", description: "Laws governing ownership and use of property" },
       { value: "family-law", label: "Family Law", description: "Laws related to family relationships, marriage, divorce, etc." },
-      { value: "corporate-law", label: "Corporate Law", description: "Laws governing companies and business entities" }
+      { value: "corporate-law", label: "Corporate Law", description: "Laws governing companies and business entities" },
+      { value: "contract-law", label: "Contract Law", description: "Laws governing agreements between parties that are legally enforceable" },
+      { value: "labor-law", label: "Labor Law", description: "Laws related to employment, wages, working conditions, and labor relations" }
     ];
     
     categories.forEach(category => {
@@ -373,10 +375,17 @@ export class MemStorage implements IStorage {
       this.glossaryCategories.set(id, { ...category, id });
     });
     
-    // Add glossary terms
+    // Find category IDs
     const constitutionalCategory = Array.from(this.glossaryCategories.values()).find(c => c.value === "constitutional-law")!;
+    const criminalCategory = Array.from(this.glossaryCategories.values()).find(c => c.value === "criminal-law")!;
+    const civilCategory = Array.from(this.glossaryCategories.values()).find(c => c.value === "civil-law")!;
+    const propertyCategory = Array.from(this.glossaryCategories.values()).find(c => c.value === "property-law")!;
+    const familyCategory = Array.from(this.glossaryCategories.values()).find(c => c.value === "family-law")!;
+    const contractCategory = Array.from(this.glossaryCategories.values()).find(c => c.value === "contract-law")!;
     
+    // Add glossary terms
     const terms = [
+      // Constitutional Law Terms
       {
         term: "Constitution",
         definition: "The fundamental law of a nation or state which establishes the character and conception of its government, laying down the basic principles to which its internal life is to be conformed.",
@@ -404,6 +413,100 @@ export class MemStorage implements IStorage {
         categoryId: constitutionalCategory.id,
         explanationHtml: "<p>In Indian law, writs are orders issued by the Supreme Court or High Courts. The five types of writs are Habeas Corpus, Mandamus, Prohibition, Certiorari, and Quo Warranto.</p>",
         references: "Indian Constitution, Article 32 and 226"
+      },
+      
+      // Criminal Law Terms
+      {
+        term: "Bail",
+        definition: "The temporary release of an accused person awaiting trial, sometimes on condition that a sum of money is lodged to guarantee their appearance in court.",
+        categoryId: criminalCategory.id,
+        explanationHtml: "<p>Bail is the conditional release of a defendant with the promise to appear in court when required. In India, bail provisions are contained in the Criminal Procedure Code, 1973.</p>",
+        references: "Criminal Procedure Code, 1973, Sections 436-450"
+      },
+      {
+        term: "FIR (First Information Report)",
+        definition: "A written document prepared by the police when they receive information about the commission of a cognizable offense.",
+        categoryId: criminalCategory.id,
+        explanationHtml: "<p>An FIR is the first step in the criminal justice process. It sets the criminal law in motion and marks the start of the criminal investigation by the police.</p>",
+        references: "Criminal Procedure Code, 1973, Section 154"
+      },
+      {
+        term: "Cognizable Offense",
+        definition: "A criminal offense in which the police may arrest a person without warrant.",
+        categoryId: criminalCategory.id,
+        explanationHtml: "<p>These are serious offenses like murder, rape, theft, etc. The police can start investigation into a cognizable case on their own and can arrest the accused without a warrant.</p>",
+        references: "Criminal Procedure Code, 1973, First Schedule"
+      },
+      
+      // Civil Law Terms
+      {
+        term: "Plaintiff",
+        definition: "A person who brings a case against another in a court of law.",
+        categoryId: civilCategory.id,
+        explanationHtml: "<p>The plaintiff is the party who initiates a lawsuit by filing a complaint with the court against the defendant, seeking a legal remedy.</p>",
+        references: "Civil Procedure Code, 1908"
+      },
+      {
+        term: "Decree",
+        definition: "The formal expression of an adjudication which conclusively determines the rights of the parties with regard to all or any of the matters in controversy in the suit.",
+        categoryId: civilCategory.id,
+        explanationHtml: "<p>A decree is the official order of the court that states the rights and liabilities of the parties in a civil case. It is the final determination of the rights of the parties in the matter brought before the court.</p>",
+        references: "Civil Procedure Code, 1908, Section 2(2)"
+      },
+      
+      // Property Law Terms
+      {
+        term: "Easement",
+        definition: "A right which the owner of one land may possess to use the land of another in a particular manner.",
+        categoryId: propertyCategory.id,
+        explanationHtml: "<p>Easements are rights to use another's property for a specific purpose, such as a right of way. They are governed by the Indian Easements Act, 1882.</p>",
+        references: "Indian Easements Act, 1882"
+      },
+      {
+        term: "Mortgage",
+        definition: "The transfer of an interest in specific immovable property for the purpose of securing the payment of money advanced or to be advanced by way of loan.",
+        categoryId: propertyCategory.id,
+        explanationHtml: "<p>A mortgage is a legal agreement where a property is offered as security for a loan. The property can be claimed by the lender if the borrower fails to repay the loan according to the agreed terms.</p>",
+        references: "Transfer of Property Act, 1882, Section 58"
+      },
+      
+      // Family Law Terms
+      {
+        term: "Maintenance",
+        definition: "Financial support that a person is ordered by a court to provide to their spouse or children.",
+        categoryId: familyCategory.id,
+        explanationHtml: "<p>In Indian family law, maintenance or alimony refers to the financial support that a husband may be required to provide to his wife upon separation or divorce. It can also refer to the support parents must provide to their children.</p>",
+        references: "Section 125 of Criminal Procedure Code, 1973; Hindu Adoptions and Maintenance Act, 1956"
+      },
+      {
+        term: "Guardianship",
+        definition: "The legal right given to a person to care for a child or incompetent adult.",
+        categoryId: familyCategory.id,
+        explanationHtml: "<p>Guardianship involves the legal responsibility to care for a minor child or an incapacitated adult. The guardian has the authority to make decisions about the ward's education, healthcare, and other important matters.</p>",
+        references: "Guardians and Wards Act, 1890; Hindu Minority and Guardianship Act, 1956"
+      },
+      
+      // Contract Law Terms
+      {
+        term: "Offer",
+        definition: "A proposal made by one person to another, expressing the offerer's willingness to enter into a contractual agreement on certain terms.",
+        categoryId: contractCategory.id,
+        explanationHtml: "<p>An offer is the initial step in forming a contract. It must be clear, definite, and communicated to the offeree. When accepted, an offer becomes a legally binding contract.</p>",
+        references: "Indian Contract Act, 1872, Section 2(a)"
+      },
+      {
+        term: "Acceptance",
+        definition: "An expression of absolute and unconditional agreement to all the terms of an offer.",
+        categoryId: contractCategory.id,
+        explanationHtml: "<p>Acceptance is the unqualified and absolute assent to all the terms of the offer. It must be communicated to the offeror and must be given in the manner prescribed by the offeror.</p>",
+        references: "Indian Contract Act, 1872, Section 2(b)"
+      },
+      {
+        term: "Consideration",
+        definition: "Something of value given by both parties to a contract that induces them to enter into the agreement.",
+        categoryId: contractCategory.id,
+        explanationHtml: "<p>Consideration is what each party gives or promises to give to the other as part of the contract. It can be money, goods, services, or a promise to do or not do something.</p>",
+        references: "Indian Contract Act, 1872, Section 2(d)"
       }
     ];
     
