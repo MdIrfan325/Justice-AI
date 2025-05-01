@@ -6,25 +6,24 @@ export class GeminiAI {
   private safetySettings: any;
 
   constructor() {
-    // Initialize with a mock API key since we'll use local processing
-    // In a real application, this would come from environment variables
-    const apiKey = process.env.GEMINI_API_KEY || "mock-api-key-for-local-processing";
-    
+    // Initialize with the provided API key
+    const apiKey = "AIzaSyANV9Jvt_9j-S_NO0z7E-nHT4w56FfLIrI";
+
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      
+
       this.model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
         systemInstruction: "You are JusticeAI, a legal assistant specializing in Indian law. Provide accurate, helpful, and concise information with citations to relevant laws, acts, or precedents where appropriate. You are not a substitute for professional legal advice, and you should make this clear in your responses when necessary."
       });
-      
+
       this.generationConfig = {
         temperature: 0.4,
         topK: 32,
         topP: 0.95,
         maxOutputTokens: 1024,
       };
-      
+
       this.safetySettings = [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
